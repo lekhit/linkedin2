@@ -1,4 +1,6 @@
 "use client"
+import {  Transition } from '@headlessui/react'
+
 
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -110,6 +112,11 @@ Apply Now
 </button>
 </div>
 
+<div
+
+className=' ease-in-out  animate-in slide-in-from-bottom deplay-200 duration-500  '
+
+     >
 <Box
 
 sx={{
@@ -128,6 +135,7 @@ onKeyDown={()=>(setOpen(false))}
 
 
 </Box>
+</div>
     </Drawer>
 </>
   )
@@ -160,6 +168,7 @@ function MyTags(){
 
   return (
     <>
+    
     <MyDrawer/>
 <div className=" card   bg-base-100 shadow-xl">
 

@@ -3,6 +3,7 @@ module.exports = {
  plugins: [
       require('daisyui'),
       require('@tailwindcss/typography'),
+      require("tailwindcss-animate"),
     ],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
