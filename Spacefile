@@ -1,0 +1,10 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: linkedin2
+    src: ./
+    engine: next
+    primary: true
+    public_routes:
+      - "*"
+    dev: "npm run dev"
