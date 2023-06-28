@@ -48,7 +48,7 @@ const props={
 
 
 
-export default function Card(){
+export default function Card(props){
   const [open,setOpen]=useState(false);
 
   function DrawerDetails(){

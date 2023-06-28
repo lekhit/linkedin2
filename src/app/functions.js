@@ -1,8 +1,5 @@
-import Card from "@/app/components/Card"
-import {Deta} from 'deta';
-import Search from '@/app/components/Search'
-const deta=Deta('c0wr3pyqvsb_FRoUY81qRxZd7EzY8U1Ww52zKAVgNYZk')
-
+'use server'
+import {jobs} from '@/utils/detaDB'
 
 const data=[{
   id:'1',
@@ -66,25 +63,10 @@ const data=[{
 
 ]
 
-export default function Page({ params }) {
-
-  return <div className="">
-
-    <div className="flex justify-center font-bold pt-10 p-4 py-10 text-4xl text-green-400">
-      {params.cat.toString().toUpperCase()}
-    </div>
-    <div className="flex justify-center">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-{data.map((item)=>(<Card key={item.id} {...item}/>))}
-</div>
-
-</div>
-
-<div className=" mt-8 join flex justify-center items-center">
-<button className="join-item btn">{"<- Prev"}</button>
-
-  <button className="join-item btn">{"Next ->"}</button>
-</div>
-    </div>
-
+export  async function search(){
+const rs=await jobs.fetch({"company_name":"Google"})
+console.log(rs)
+return rs;
 }
+
+
