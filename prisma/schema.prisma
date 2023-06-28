@@ -1,11 +1,86 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {` 
+generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+model City {
+  id       Int        @id @default(autoincrement())
+  value    String     @unique
+  location Location[]
+}
+
+model Country {
+  id       Int        @id @default(autoincrement())
+  value    String     @unique
+  Location Location[]
+}
+
+model Location {
+  id        Int     @id @default(autoincrement())
+  city      City    @relation(fields: [cityId], references: [id])
+  cityId    Int
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId Int
+  Card      Card[]
+}
+
+model Deta {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  entry_key String
+  // entry key is used to associate the deta key
+  Company   Company[]
+  Card      Card[]
+}
+
+model Company {
+  id     Int    @id @default(autoincrement())
+  name   String
+  deta   Deta   @relation(fields: [detaId], references: [id])
+  detaId Int
+  Card   Card[]
+}
+
+model Salary {
+  id             Int     @id @default(autoincrement())
+  value          Decimal
+  currency       String? @default("Rupee")
+  salaryMinCards Card[]  @relation("salaryMin")
+  salaryMaxCards Card[]  @relation("salaryMax")
+}
+
+model Tags {
+  id    Int    @id @default(autoincrement())
+  value String @unique
+  cards Card[]
+}
+
+model Card {
+  id             Int       @id @default(autoincrement())
+  company        Company   @relation(fields: [companyId], references: [id])
+  salaryView     String
+  salaryMin      Salary?   @relation("salaryMin", fields: [salaryMinId], references: [id])
+  salaryMax      Salary?   @relation("salaryMax", fields: [salaryMaxId], references: [id])
+  salaryDuration String? // can be converted to enum
+  location       Location  @relation(fields: [locationId], references: [id])
+  modeOfWork     String // remote hybrid office convert to enum
+  tags           Tags[]
+  deta           Deta      @relation(fields: [detaId], references: [id])
+  positionName   String
+  createdAt      DateTime  @default(now())
+  LastDate       DateTime?
+  applyURL       String?
+
+  companyId   Int
+  salaryMinId Int?
+  salaryMaxId Int?
+  locationId  Int
+  detaId      Int
 }
