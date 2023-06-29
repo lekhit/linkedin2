@@ -1,17 +1,21 @@
 import { NextResponse } from 'next/server'
 import { prisma,jobs } from '@/utils/detaDB'
+import { search } from '@/app/functions'
 
- 
-export async function GET(req) {
-  
-
-
+ const limit=2;
+export async function GET(request) {
+const { searchParams } = new URL(request.url)
+  console.log(searchParams.get('page'))
+  const page=searchParams.get('page')
+  let pageNo=parseInt(page);
+  const skip=(pageNo-1)*limit
   const card= await prisma.card.findMany({
-   where:{}
+    include:{tags:true},
+skip:skip,
+take:limit,
+   where:{tags:{some:{value:'google'}}}
     ,
-    include:{location:{
-  select: {city:{select:{value:true}},country:{select:{value:true}}}
-    },deta:true,}
+    
   })
  
   return NextResponse.json(card)

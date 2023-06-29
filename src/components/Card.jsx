@@ -14,50 +14,22 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShareIcon from '@mui/icons-material/Share';
 import { useState } from 'react';
 
-const props={
-  id:'1',
-  apply_url:"https://www.google.com",
-  share_url:'https://bing.com',
-  job_title:"Frontend Manager",
-  company_name:"Google",
-  location:"Delhi",
-  type:"Hybrid",
-  last_apply:"23/Dec/2023",
-  salary:"20k-30k",
-  description:`We are looking for a qualified Front-end developer to join our IT team. You will be responsible for building the ‘client-side’ of our web applications. You should be able to translate our company and customer needs into functional and appealing interactive applications.
-  If you’re interested in creating a user-friendly environment by writing code and moving forward in your career, then this job is for you. `,
-  tags:[{text:'frontend',id:'1'},{text:'react',id:"2"},{text:'angular',id:'3'}],
-  information:[{title:'Requirements and Skills',points:[
-    'Work or school experience as a Data Scientist, Python Developer or similar role',
-    'Expertise with Python data packages (Pandas, NumPy), Python Data Structures and knowledge of general programming principles',
-    'Expertise using Microsoft Office Suite',
-    'Knowledge of SQL Querying techniques and SQL integration.',
-    'Experience using data visualization and Business Intelligence tools (pyPlot, Power BI)',
-    'Familiarity with Data Engineering Tools and pipelines is a plus (pySpark, Apache Airflow)',
-    'OCR Experience Helpful – Not required',
-    'Working with documents in HIPAA compliant manner Team spirit',
-    'Good problem-solving skills',
-    'Technical degree in Computer Science, Engineering, Data Science or relevant field',
-  ]}, {title:'Responsibilities',points:[
-    'Working closely with our engineering team to build efficient ETL pipelines',
-'Building tools and frameworks to provide scalable data-driven insights',
-'Producing data-driven reports to supplement investment decisions',
-  ]}]
-}
+
 
 
 
 
 export default function Card(props){
+  props.logoIMG='https://thumbsnap.com/i/3UFcD2ew.png';
   const [open,setOpen]=useState(false);
 
   function DrawerDetails(){
     return (
       <div className='p-4 md:p-10 m-4  border-2 rounded-lg '>
-<div className='flex justify-center font-bold text-xl md:text-4xl'>{props.company_name}</div>
+<div className='flex justify-center font-bold text-xl md:text-4xl'>{props.company}</div>
 <div className='flex flex-col items-center  p-10 m-4  border-2 rounded-lg ' > 
 <div className='text-2xl md:text-6xl'>
-{props.job_title} </div>
+{props.positionName} </div>
 <AdditionalDetails/>
 <MyTags/>
 
@@ -97,7 +69,7 @@ function MyDrawer(){
       transitionDuration={{enter:300,exit:300}}
     >
 <div className=' md:sticky top-2 flex justify-end p-4'>
-<a target='_blank' href={props.apply_url}>
+<a target='_blank' href={props.applyURL}>
 <button className='btn btn-primary  ' onClick={()=>(setOpen(false))}>
 Apply Now
    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -144,11 +116,11 @@ onKeyDown={()=>(setOpen(false))}
   function AdditionalDetails(){
     return (
       <div className="flex text-sm font-light my-4">
-  <div className="mr-4"><span className='mr-2'><CurrencyRupeeIcon/></span> {props.salary}</div> 
+  <div className="mr-4"><span className='mr-2'><CurrencyRupeeIcon/></span> {props.salaryView}</div> 
   <div className="w-[2px]  bg-white"></div> 
   <div className="mx-4"> <span className='mx-2'><LocationOnIcon/></span>  {props.location}</div>
   <div className="w-[2px]  bg-white"></div> 
-  <div className="ml-4"><span className='mx-2'><AccessTimeIcon/></span>  {props.last_apply}</div>
+  <div className="ml-4"><span className='mx-2'><AccessTimeIcon/></span>  {props.lastData}</div>
 </div>
     )
   }
@@ -157,7 +129,7 @@ function MyTags(){
     <div className='flex flex-between gap-4 flex-wrap p-3'>
       {props.tags.map((item,id)=>{
         return (
-        <div key={item.id} className='bg-secondary rounded-full px-4' > {item.text} </div>
+        <div key={item.id} className='bg-secondary rounded-full px-4' > {item.value} </div>
         )
       })}
     </div>
@@ -172,25 +144,26 @@ function MyTags(){
     <MyDrawer/>
 <div className=" card   bg-base-100 shadow-xl">
 
-  <img className="rounded-md absolute right-0 m-2" src='https://thumbsnap.com/i/3UFcD2ew.png' alt='google logo' height={40} width={40}></img>
+  <img className="rounded-md absolute right-0 m-2" src={props.logoIMG} alt='logo' height={40} width={40}></img>
     
 
   <div className="card-body">
   <Link href={`/job/${props.id}`}>
   <div className='w-3/4'>
-   <h2 className="font-medium text-md md:text-2xl"><div className="align-baseline">{props.job_title}</div>
+   <h2 className="font-medium text-md md:text-2xl"><div className="align-baseline">{props.positionName}</div>
     </h2>
-    <p className="font-bold">Google</p>
+    <p className="font-bold">{props.company}</p>
     <AdditionalDetails/>
     </div>
     
-<p className='line-clamp-2'>{props.description.slice(0,200)}</p>
+<p className='line-clamp-2'>{props.description?.slice(0,200)}</p>
+<div className='line-clamp-2'><MyTags/></div>
 </Link>
 
 
 
     <div className="card-actions justify-end ">
-    <a target='_blank' href={props.apply_url}>
+    <a target='_blank' href={props.applyURL}>
 <button className='btn btn-primary' >
 Apply Now
    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
