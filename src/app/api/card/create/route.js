@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server'
 import { prisma,jobs } from '@/utils/detaDB'
-import { create } from '@mui/material/styles/createTransitions'
-import Detahandler from './detahanler'
 
-const deta_data={}
 
 
 export async function POST(req) {
   const body=await req.json();
-  console.log(body)
+  //console.log(body)
  const body2= {
     apply_url:"https://www.google.com",
     job_title:"Frontend Manager",

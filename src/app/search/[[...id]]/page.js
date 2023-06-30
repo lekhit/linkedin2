@@ -1,11 +1,11 @@
 import Card from "@/components/Card"
 import Link from "next/link";
-import {Deta,} from 'deta';
+
 import { prisma,jobs } from "@/utils/detaDB";
 import Search from './Search'
 import { redirect } from "next/navigation";
 
-const deta=Deta('c0wr3pyqvsb_FRoUY81qRxZd7EzY8U1Ww52zKAVgNYZk')
+
 
 
 const data=[
