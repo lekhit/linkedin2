@@ -22,3 +22,4 @@ micros:
         - name: "CockroachDB_DATABASE_URL"
           description: "the cockroach db url"
           default: "postgresql://patil1001970_website:VWEcSUUun4S1lU-xq8CZ-g@slimed-scylla-3107.7s5.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
+      
