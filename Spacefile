@@ -8,3 +8,11 @@ micros:
     public_routes:
       - "*"
     dev: "npm run dev"
+    presets:
+      env:
+        - name: "DATABASE_URL"
+          description: "database url"
+          default: "postgres://dr1001971:zPULwgTcJ49v@ep-little-unit-686600-pooler.ap-southeast-1.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10"
+        - name: "DIRECT_URL"
+          description: "direct url of neon db"
+          default: "postgres://dr1001971:zPULwgTcJ49v@ep-little-unit-686600.ap-southeast-1.aws.neon.tech/neondb?connect_timeout=10"

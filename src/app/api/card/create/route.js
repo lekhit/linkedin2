@@ -7,8 +7,9 @@ const deta_data={}
 
 
 export async function POST(req) {
-  
- const body= {
+  const body=await req.json();
+  console.log(body)
+ const body2= {
     apply_url:"https://www.google.com",
     job_title:"Frontend Manager",
     company_name:"Google",
@@ -38,15 +39,16 @@ export async function POST(req) {
   }
  
  
-const d=await jobs.put(deta_data)
-console.log(d)
-  const data =await req.json()
+const d=await jobs.put({information:body.information,description:body.description})
+
+  //const data =await req.json()
+
   const card= await prisma.card.create({
     data:{
       modeOfWork:body.type,
-      positionName:body.job_title,
-      company:body.company_name,
-    salaryView:body.salary,
+      positionName:body.positionName,
+      company:body.company,
+    salaryView:body.salaryView,
       lastDate: body.lastDate,
       location:body.location,
       deta:{
@@ -62,5 +64,5 @@ console.log(d)
     include:{deta:true,tags:true}
   })
  
-  return NextResponse.json(card)
+  return NextResponse.json({...card,...d})
 }

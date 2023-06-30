@@ -1,15 +1,19 @@
 // `app/page.js` is the UI for the `/` URL
-import DrawerDetails from '@/components/DrawerDetails'
-import { prisma } from '@/utils/detaDB'
+import DrawerDetails from '@/components/DrawerDetails2'
+import { prisma ,jobs} from '@/utils/detaDB'
 
-function getjob(id=1){
+async function getjob(id=1){
   const Id=parseInt(id);
-const results=prisma.card.findUnique({where:{id:Id},include:{deta:true,tags:true}})
+const results= await prisma.card.findUnique({where:{id:Id},include:{deta:true,tags:true}})
+const deta_data=await jobs.get(results.deta.entry_key)
+return {...results,information:deta_data.information}
 }
-export default function Page({params}) {
-
+export default async function Page({params}) {
+const data=await getjob(params.id);
+console.log(data)
   return (<>
   <div >
-  <DrawerDetails/></div>
+  <DrawerDetails {...data}/>
+  </div>
   </>)
 }

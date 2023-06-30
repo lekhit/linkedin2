@@ -1,5 +1,4 @@
 "use client"
-import {  Transition } from '@headlessui/react'
 
 
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
@@ -8,64 +7,16 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShareIcon from '@mui/icons-material/Share';
 import { useState } from 'react';
-import Points from '@/components/Points';
-import MDX from './MDX';
+import {MyTags,AdditionalDetails,DDetails,DrawerDetails} from './DrawerDetails2'
 
-
-function DDetails({info}){
-  if(info.type==='mdx'){
-    return (<MDX markdown={info.content}/>)
-  }
-  else{
-    return(<Points title={info.title} points={info.points}/>)
-  }
-}
 
 
 export default function Card(props){
   props.logoIMG='https://thumbsnap.com/i/3UFcD2ew.png';
   const [open,setOpen]=useState(false);
-
-  function DrawerDetails(){
-    return (
-      <div className='p-4 md:p-10 m-4  border-2 rounded-lg '>
-<div className='flex justify-center font-bold text-xl md:text-4xl'>{props.company}</div>
-<div className='flex flex-col items-center  p-10 m-4  border-2 rounded-lg ' > 
-<div className='text-2xl md:text-6xl'>
-{props.positionName} </div>
-<AdditionalDetails/>
-<MyTags/>
-
-</div>
-{/* adding details for the skills here */}
-<div className=' md:m-4 md:p-6 md:border-2 md:rounded-lg'>
-
-{props.information.map((info,id)=>{
-  return (
-    <div key={id} className='md:m-4 md:p-6 md:border-2 md:rounded-lg'>
-    {/* <div className='w-full text-start text-xl font-medium '>{info.title}  </div>
-    <ul className='list-disc p-2'>
-    {info.points.map((item,id)=>{
-      return (
-        <li key={id}>{item}</li>
-      )
-    })}
-    </ul> */}
-    <DDetails key={id} info={info}/>
-    </div>
-    
-  )
-})}
-</div>
-
-      </div>
-    )
-  }
 
 function MyDrawer(){
   return (
@@ -111,7 +62,7 @@ onKeyDown={()=>(setOpen(false))}
 
 
 
-<DrawerDetails/>
+<DrawerDetails {...props}/>
 
 
 
@@ -122,28 +73,6 @@ onKeyDown={()=>(setOpen(false))}
   )
 }
 
-  function AdditionalDetails(){
-    return (
-      <div className="flex text-sm font-light my-4">
-  <div className="mr-4"><span className='mr-2'><CurrencyRupeeIcon/></span> {props.salaryView}</div> 
-  <div className="w-[2px]  bg-white"></div> 
-  <div className="mx-4"> <span className='mx-2'><LocationOnIcon/></span>  {props.location}</div>
-  <div className="w-[2px]  bg-white"></div> 
-  <div className="ml-4"><span className='mx-2'><AccessTimeIcon/></span>  {props.lastData}</div>
-</div>
-    )
-  }
-function MyTags(){
-  return (
-    <div className='flex flex-between gap-4 flex-wrap p-3'>
-      {props.tags.map((item,id)=>{
-        return (
-        <div key={item.id} className='bg-secondary rounded-full px-4' > {item.value} </div>
-        )
-      })}
-    </div>
-  )
-}
 
 
 
@@ -162,11 +91,11 @@ function MyTags(){
    <h2 className="font-medium text-md md:text-2xl"><div className="align-baseline">{props.positionName}</div>
     </h2>
     <p className="font-bold">{props.company}</p>
-    <AdditionalDetails/>
+    <AdditionalDetails {...props}/>
     </div>
     
 <p className='line-clamp-2'>{props.description?.slice(0,200)}</p>
-<div className='line-clamp-2'><MyTags/></div>
+<div className='line-clamp-2'><MyTags {...props}/></div>
 </Link>
 
 

@@ -1,6 +1,6 @@
 const { Deta } = require('deta');
 
-export const deta=Deta(process.env.DETA_KEY)
+export const deta=Deta()
 
 export const jobs=deta.Base('jobs2')
 export const blogs=deta.Base('blogs')
