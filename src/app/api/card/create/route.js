@@ -47,7 +47,7 @@ console.log(d)
       positionName:body.job_title,
       company:body.company_name,
     salaryView:body.salary,
-      LastDate: new Date(body.last_apply.year,body.last_apply.month,body.last_apply.day),
+      lastDate: body.lastDate,
       location:body.location,
       deta:{
         create:{

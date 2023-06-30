@@ -13,10 +13,18 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShareIcon from '@mui/icons-material/Share';
 import { useState } from 'react';
+import Points from '@/components/Points';
+import MDX from './MDX';
 
 
-
-
+function DDetails({info}){
+  if(info.type==='mdx'){
+    return (<MDX markdown={info.content}/>)
+  }
+  else{
+    return(<Points title={info.title} points={info.points}/>)
+  }
+}
 
 
 export default function Card(props){
@@ -40,14 +48,15 @@ export default function Card(props){
 {props.information.map((info,id)=>{
   return (
     <div key={id} className='md:m-4 md:p-6 md:border-2 md:rounded-lg'>
-    <div className='w-full text-start text-xl font-medium '>{info.title}  </div>
+    {/* <div className='w-full text-start text-xl font-medium '>{info.title}  </div>
     <ul className='list-disc p-2'>
     {info.points.map((item,id)=>{
       return (
         <li key={id}>{item}</li>
       )
     })}
-    </ul>
+    </ul> */}
+    <DDetails key={id} info={info}/>
     </div>
     
   )

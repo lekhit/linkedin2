@@ -12,7 +12,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShareIcon from '@mui/icons-material/Share';
 import { useState } from 'react';
 import MDX from '@/components/MDX';
-import Information from './Information';
+import Points from './Points';
 
 const props={
   id:'1',
@@ -52,6 +52,14 @@ const markdown=`
   #### Thank you
   `;
 
+  function DDetails({info}){
+    if(info.type==='mdx'){
+      return (<MDX markdown={info.content}/>)
+    }
+    else{
+      return(<Points title={info.title} points={info.points}/>)
+    }
+  }
 
 export default function DrawerDetails(){
 
@@ -68,10 +76,8 @@ export default function DrawerDetails(){
 </div>
 {/* adding details for the skills here */}
 <div className=' md:m-4 md:p-6 md:border-2 md:rounded-lg'>
+{props.information.map((info ,id)=>(<DDetails key={id} info={info}/>))}
 
-<Information information={props.information}/>
-
-<MDX markdown={markdown}/>
 
 </div>
 

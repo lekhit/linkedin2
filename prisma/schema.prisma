@@ -38,6 +38,7 @@ model Card {
   createdAt      DateTime  @default(now())
   lastDate       DateTime?
   applyURL       String?
+  typeOfOpp      String  @default("jobs") //jobs internship freelance
 
   detaId      Int @unique
 }

@@ -2,6 +2,9 @@ import Card from "@/components/Card"
 import Link from "next/link";
 import {Deta,} from 'deta';
 import { prisma,jobs } from "@/utils/detaDB";
+import Search from './Search'
+import { redirect } from "next/navigation";
+
 const deta=Deta('c0wr3pyqvsb_FRoUY81qRxZd7EzY8U1Ww52zKAVgNYZk')
 
 
@@ -67,12 +70,25 @@ const data=[
   }
 ]
 const limit=4;
-async function getData(page=1) {
- const count=await prisma.card.count();
+async function getData(page=1,search=undefined) {
+  let query={}
+if(typeof search !== 'undefined'){
+  if(typeof search.query!=='undefined' &&  search.query!==''){
+query={
+  tags:{
+      some:{value:{contains:search.query}}
+    }};
+  }
+  if(typeof search.category!=='undefined' &&  search.category!=='')
+query.typeOfOpp=search.category.toLowerCase();
+}
+
+ const count=await prisma.card.count({ where:query});
   const pageNO=parseInt(page)
   const res = await prisma.card.findMany({
     skip:(page-1)*limit,
     take:limit,
+  where:query,
     include:
       {deta:true,tags:true}
   });
@@ -89,20 +105,28 @@ async function getData(page=1) {
   // You can return Date, Map, Set, etc.
  
   // Recommendation: handle errors
- console.log(count)
  
-const np=(pageNO+1)%(Math.ceil(count/limit));
+const np=(pageNO+1)%(Math.floor(count/limit)+1);
  const nextPage= (np)<1?1:np
  const prePage=(pageNO-1)===0?1:pageNO-1;
   return {res,count,prePage,nextPage}
 }
+const submitFunction=async (formData)=>{
+  "use server"
+const dat=formData.get('search');
+const category=formData.get('cat')
+redirect(`/search/1/?query=${dat}&category=${category}`)
+}
 
-export default async  function Page({ params }) {
+export default async  function Page({ params,searchParams }) {
 const num=params.id;
-const data= await getData(num?num:1)
+const data= await getData(num?num:1,searchParams)
 
   return <div className="">
 
+    <div className="flex justify-center p-4"> 
+    <Search submitFunction={submitFunction}/>
+    </div>
     
     <div className="flex justify-center">
       
@@ -113,11 +137,15 @@ const data= await getData(num?num:1)
 </div>
 
 <div className=" mt-8 join flex justify-center items-center">
-<Link href={`/search/${data.prePage}`}><button className="join-item btn">{"<- Prev"}</button>
-</Link>
+{data.prePage!==parseInt(num) && <Link href={{pathname:`/search/${data.prePage}`, query:{...searchParams}}}><button   className="join-item btn">
+  
+  {"<- Prev"}
+  
+  </button>
+</Link>}
 
- <Link href={`/search/${data.nextPage}`} > <button className="join-item btn">{"Next ->"}</button></Link>
-</div>
+ {data.nextPage!==parseInt(num) && data.nextPage!==1 && <Link href={{pathname:`/search/${data.nextPage}`, query:{...searchParams}}} > <button className="join-item btn">{"Next ->"}</button></Link>
+}</div>
     </div>
 
 }
