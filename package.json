@@ -7,8 +7,7 @@
     "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
-    "version":"next --version",
-
+    "version": "next --version",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "prisma:generate": "prisma generate"
   },
@@ -37,6 +36,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "daisyui": "^3.1.5",
+    "encoding": "^0.1.13",
     "prisma": "^4.16.1",
     "tailwindcss-animate": "^1.0.6"
   }

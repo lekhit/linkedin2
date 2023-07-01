@@ -3,11 +3,14 @@
 
 // .env
 
+generator client {
+provider = "prisma-client-js"
+}
 
 // prisma/schema.prisma
 datasource db {
   provider = "cockroachdb"
-  url      = env("CockroachDB_DATABASE_URL")
+  url      = "postgresql://patil1001970_website:VWEcSUUun4S1lU-xq8CZ-g@slimed-scylla-3107.7s5.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
 }
 model Deta {
    id String  @id @default(dbgenerated("gen_random_uuid()"))
@@ -25,6 +28,7 @@ model Tags {
   value String @unique
   cards Card[]
 }
+
 
 model Card {
    id String @id @default(dbgenerated("gen_random_uuid()"))

@@ -1,9 +1,9 @@
-const { Deta } = require('deta');
+// const { Deta } = require('deta');
 
-export const deta=Deta(process.env.DETA_KEY)
+// export const deta=Deta(process.env.DETA_KEY,1,"c02R7jSCpopE")
 
-export const jobs=deta.Base('jobs2')
-export const blogs=deta.Base('blogs')
+// export const jobs=deta.Base('jobs2')
+// export const blogs=deta.Base('blogs')
 import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as {

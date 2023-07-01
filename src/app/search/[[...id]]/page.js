@@ -1,7 +1,7 @@
 import Card from "@/components/Card"
 import Link from "next/link";
 
-import { prisma,jobs } from "@/utils/detaDB";
+import { prisma } from "@/utils/detaDB";
 import Search from './Search'
 import { redirect } from "next/navigation";
 
@@ -96,7 +96,7 @@ query.typeOfOpp=search.category.toLowerCase();
   for(let item in res){
     const i=res[item];
     const key=i.deta.entry_key;
-   const d= await jobs.get(key)
+   const d= {} //await jobs.get(key)
    deta_data.push(d);
    i.information=d.information;
    i.description=d.description
