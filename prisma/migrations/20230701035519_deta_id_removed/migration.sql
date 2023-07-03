@@ -1,18 +1,18 @@
 -- CreateTable
-CREATE TABLE "Deta" (
-    "id" STRING NOT NULL DEFAULT gen_random_uuid(),
-    "name" STRING NOT NULL,
-    "entry_key" STRING NOT NULL,
-
-    CONSTRAINT "Deta_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Tags" (
     "id" STRING NOT NULL DEFAULT gen_random_uuid(),
     "value" STRING NOT NULL,
 
     CONSTRAINT "Tags_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Information" (
+    "id" STRING NOT NULL DEFAULT gen_random_uuid(),
+    "content" JSONB NOT NULL,
+    "cardId" STRING,
+
+    CONSTRAINT "Information_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -27,7 +27,6 @@ CREATE TABLE "Card" (
     "lastDate" STRING,
     "applyURL" STRING,
     "typeOfOpp" STRING NOT NULL DEFAULT 'jobs',
-    "detaId" STRING NOT NULL,
 
     CONSTRAINT "Card_pkey" PRIMARY KEY ("id")
 );
@@ -42,16 +41,13 @@ CREATE TABLE "_CardToTags" (
 CREATE UNIQUE INDEX "Tags_value_key" ON "Tags"("value");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Card_detaId_key" ON "Card"("detaId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "_CardToTags_AB_unique" ON "_CardToTags"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_CardToTags_B_index" ON "_CardToTags"("B");
 
 -- AddForeignKey
-ALTER TABLE "Card" ADD CONSTRAINT "Card_detaId_fkey" FOREIGN KEY ("detaId") REFERENCES "Deta"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Information" ADD CONSTRAINT "Information_cardId_fkey" FOREIGN KEY ("cardId") REFERENCES "Card"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CardToTags" ADD CONSTRAINT "_CardToTags_A_fkey" FOREIGN KEY ("A") REFERENCES "Card"("id") ON DELETE CASCADE ON UPDATE CASCADE;

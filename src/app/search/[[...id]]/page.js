@@ -90,17 +90,9 @@ query.typeOfOpp=search.category.toLowerCase();
     take:limit,
   where:query,
     include:
-      {deta:true,tags:true}
+      {tags:true}
   });
-  const deta_data=[]
-  for(let item in res){
-    const i=res[item];
-    const key=i.deta.entry_key;
-   const d= {} //await jobs.get(key)
-   deta_data.push(d);
-   i.information=d.information;
-   i.description=d.description
-  }
+ 
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
  

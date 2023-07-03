@@ -4,7 +4,7 @@
 // .env
 
 generator client {
-provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 // prisma/schema.prisma
@@ -12,37 +12,33 @@ datasource db {
   provider = "cockroachdb"
   url      = "postgresql://patil1001970_website:VWEcSUUun4S1lU-xq8CZ-g@slimed-scylla-3107.7s5.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
 }
-model Deta {
-   id String  @id @default(dbgenerated("gen_random_uuid()"))
-  name      String    
-  entry_key String
-  // entry key is used to associate the deta key
-  Card      Card?
-}
-
-
 
 
 model Tags {
-   id String @id @default(dbgenerated("gen_random_uuid()"))
+  id    String @id @default(dbgenerated("gen_random_uuid()"))
   value String @unique
   cards Card[]
 }
 
+model Information {
+  id      String          @id @default(dbgenerated("gen_random_uuid()"))
+  content Json
+}
 
 model Card {
-   id String @id @default(dbgenerated("gen_random_uuid()"))
-  company        String
-  salaryView     String
-  location       String?
-  modeOfWork     String // remote hybrid office convert to enum
-  tags           Tags[]
-  deta           Deta?      @relation(fields: [detaId], references: [id])
-  positionName   String
-  createdAt      DateTime  @default(now())
-  lastDate       String?
-  applyURL       String?
-  typeOfOpp      String  @default("jobs") //jobs internship freelance
+  id           String        @id @default(dbgenerated("gen_random_uuid()"))
+  company      String
+  salaryView   String
+  location     String?
+  modeOfWork   String // remote hybrid office convert to enum
+  tags         Tags[]
+  positionName String
+  createdAt    DateTime      @default(now())
+  lastDate     String?
+  applyURL     String?
+  typeOfOpp    String        @default("jobs") //jobs internship freelance
+  information  Json
 
-  detaId      String @unique
 }
+
+
