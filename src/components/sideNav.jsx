@@ -18,7 +18,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import SensorWindowIcon from '@mui/icons-material/SensorWindow';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import MailIcon from '@mui/icons-material/Mail';
@@ -111,9 +111,11 @@ const listItems =[
   },
   {
     text: "Jobs",
-    url: "/search/jobs",
+    url: "/search",
     icon: <WorkIcon />
   },
+  {text:"Blogs",
+url:"/blog",icon:<SensorWindowIcon/>},
   {
     text: "Resources",
     url: "/resources",
@@ -144,6 +146,7 @@ const listItems =[
     url: "/about-us",
     icon: <ForumIcon />
   },
+
   
 ];
 
@@ -291,6 +294,7 @@ function Sidenav() {
     </>
   );
 }
+
 
 
 export default function Nav(){

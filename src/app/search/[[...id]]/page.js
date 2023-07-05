@@ -110,34 +110,58 @@ const category=formData.get('cat')
 redirect(`/search/1/?query=${dat}&category=${category}`)
 }
 
-export default async  function Page({ params,searchParams }) {
-const num=params.id;
-const data= await getData(num?num:1,searchParams)
 
-  return <div className="">
+export function SearchPage({data,num,searchParams}){
 
-    <div className="flex justify-center p-4"> 
-    <Search submitFunction={submitFunction}/>
-    </div>
-    
-    <div className="flex justify-center">
-      
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-{data.res.map((item)=>(<Card key={item.id} {...item}/>))}
+  function Pagination({data}){
+    if (data.res.length>0)
+   return <>{data.res.map((item)=>(<Card key={item.id} {...item}/>))}
+   </> 
+   else{
+    return (
+      <>
+      Stay tuned for more details....
+      </>
+    )
+   }
+  }
+  return (
+<div className=" ">
+
+<div className="flex justify-center p-4"> 
+<Search submitFunction={submitFunction}/>
+</div>
+
+<div className="flex justify-center">
+  
+<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+<Pagination data={data}/>
 </div>
 
 </div>
 
 <div className=" mt-8 join flex justify-center items-center">
 {data.prePage!==parseInt(num) && <Link href={{pathname:`/search/${data.prePage}`, query:{...searchParams}}}><button   className="join-item btn">
-  
-  {"<- Prev"}
-  
-  </button>
+
+{"<- Prev"}
+
+</button>
 </Link>}
 
- {data.nextPage!==parseInt(num) && data.nextPage!==1 && <Link href={{pathname:`/search/${data.nextPage}`, query:{...searchParams}}} > <button className="join-item btn">{"Next ->"}</button></Link>
+{data.nextPage!==parseInt(num) && data.nextPage!==1 && <Link href={{pathname:`/search/${data.nextPage}`, query:{...searchParams}}} > <button className="join-item btn">{"Next ->"}</button></Link>
 }</div>
-    </div>
+</div>
 
+  )
+}
+
+export default async  function Page({ params,searchParams }) {
+const num=params.id;
+const data= await getData(num?num:1,searchParams)
+
+  return (
+    <div className='h-screen'>
+    <SearchPage data={data} num={num} searchParams={searchParams}/>
+    </div>
+  )
 }

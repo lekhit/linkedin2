@@ -13,32 +13,54 @@ datasource db {
   url      = "postgresql://patil1001970_website:VWEcSUUun4S1lU-xq8CZ-g@slimed-scylla-3107.7s5.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
 }
 
-
 model Tags {
-  id    String @id @default(dbgenerated("gen_random_uuid()"))
-  value String @unique
-  cards Card[]
+  id      String  @id @default(dbgenerated("gen_random_uuid()"))
+  value   String  @unique
+  cards   Card[]
+  Posts   Posts?  @relation(fields: [postsId], references: [id])
+  postsId String?
 }
 
 model Information {
-  id      String          @id @default(dbgenerated("gen_random_uuid()"))
+  id      String @id @default(dbgenerated("gen_random_uuid()"))
   content Json
 }
 
 model Card {
-  id           String        @id @default(dbgenerated("gen_random_uuid()"))
+  id           String   @id @default(dbgenerated("gen_random_uuid()"))
   company      String
   salaryView   String
   location     String?
   modeOfWork   String // remote hybrid office convert to enum
   tags         Tags[]
   positionName String
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime @default(now())
   lastDate     String?
   applyURL     String?
-  typeOfOpp    String        @default("jobs") //jobs internship freelance
+  typeOfOpp    String   @default("jobs") //jobs internship freelance
   information  Json
-
+  savedBy      User[]
 }
 
+model User {
+  id         String   @id @default(dbgenerated("gen_random_uuid()"))
+  name       String
+  email      String   @unique
+  avatar    String?
+  description String?
+  createdAt  DateTime @default(now())
+  posts      Posts[]
+  savedCards Card[]
+}
+
+model Posts {
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
+  title String
+  description String
+    content   String
+  createdAt DateTime @default(now())
+  tags      Tags[]
+  author    User     @relation(fields: [userId], references: [id])
+  userId    String
+}
 
