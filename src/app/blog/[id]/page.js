@@ -31,7 +31,8 @@ export default async  function Page({params,}){
   
   return (
     <>
-    <div>
+    <div className="p-4">
+
 <MDX markdown={data.content}/>
 
 </div>
