@@ -32,6 +32,7 @@ import  { useRouter } from 'next/navigation';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red, blue } from '@mui/material/colors';
+import Link from 'next/link';
 
 
 const drawerWidth = 240;
@@ -121,21 +122,21 @@ url:"/blog",icon:<SensorWindowIcon/>},
     url: "/resources",
     icon: <CategoryIcon />
   },
-  {
-    text: "Recruitment",
-    url: "/recruitment",
-    icon: <HandshakeIcon />
-  },
+  // {
+  //   text: "Recruitment",
+  //   url: "/recruitment",
+  //   icon: <HandshakeIcon />
+  // },
   {
     text: "Training Programs",
     url: "/training-programs",
     icon: <InboxIcon />
   },
-  {
-    text: "Referral",
-    url: "/referral",
-    icon: <MailIcon />
-  },
+  // {
+  //   text: "Referral",
+  //   url: "/referral",
+  //   icon: <MailIcon />
+  // },
   {
     text: "Scan Your Resume",
     url: "/scan-resume",
@@ -159,13 +160,13 @@ const Mobilenav=()=>{
   const handleListItemClick = (url, itemText) => {
     setSelectedItem(itemText); 
     // navigate(url);
-    router.push(url);
   };
   return(
     <div className='z-10 flex md:justify-around  w-[100vw] fixed bottom-0  overflow-auto '>
 <div className='flex items-center '>
 
 {listItems.map((item, i) => (
+                <Link key={i} href={item.url}>
                 <ListItem disablePadding sx={{ display: 'block' }} key={i}>
                   <div className="tooltip" data-tip={item.text}>
                      <ListItemButton
@@ -186,6 +187,7 @@ const Mobilenav=()=>{
                   </ListItemButton>
                   </div>
                 </ListItem>
+                </Link>
               ))}
     </div>
     </div>
@@ -216,7 +218,6 @@ function Sidenav() {
   const handleListItemClick = (url, itemText) => {
     setSelectedItem(itemText); 
     // navigate(url);
-    router.push(url);
   };
 
   return (
@@ -234,6 +235,7 @@ function Sidenav() {
             </DrawerHeader>
             <List>
               {listItems.map((item, i) => (
+              <Link key={i} href={item.url}>
                 <ListItem disablePadding sx={{ display: 'block' }} key={i}>
                   <ListItemButton
                     onClick={() => handleListItemClick(item.url, item.text)} 
@@ -256,6 +258,7 @@ function Sidenav() {
                     {open && <ListItemText primary={item.text} />}
                   </ListItemButton>
                 </ListItem>
+                </Link>
               ))}
 
 
