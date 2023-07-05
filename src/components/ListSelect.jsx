@@ -8,11 +8,11 @@ export default function Example({selected, setSelected,options}) {
 const people=options
 
   return (
-    <div className=" w-72  ">
+    <div className=" md:text-sm w-24 md:w-72  ">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative ">
           <Listbox.Button className="text-gray-900 input input-bordered    w-full cursor-default rounded-lg bg-base-200  pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <input type='text' disabled className="bg-base-200 text-white block truncate font-bold" value={selected?.name} name="category"/>
+            <input type='text' disabled className="w-20 bg-base-200 text-white block truncate font-bold" value={selected?.name} name="category"/>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
                 className="h-5 w-5 text-gray-400"
@@ -31,7 +31,7 @@ const people=options
                 <Listbox.Option
                   key={personIdx}
                   className={({ active }) =>
-                    `relative cursor-default text-white select-none py-2 pl-10 pr-4 ${
+                    `relative cursor-default text-white select-none py-2 md:pl-10 md:pr-4 ${
                       active ? 'bg-primary  ' : ''
                     }`
                   }

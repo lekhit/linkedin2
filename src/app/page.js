@@ -12,7 +12,7 @@ export default function Page() {
   return <>
   <div className="h-full">
 
-  <div className="md:p-8 grid grid-cols-2 gap-8 justify-items-center "> 
+  <div className="md:p-8 p-2 py-8 grid grid-cols-2 gap-8 justify-items-center "> 
   {data.map((item,id)=>(<div key={id} className='w-full'> <Link  href={item.href}> <div className={`flex h-[150px] ${item.bg} w-full rounded justify-center items-center text-2xl text-red-600`} > {item.title} </div></Link></div>
   ))}
   </div>
