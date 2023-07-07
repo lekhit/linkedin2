@@ -60,6 +60,7 @@ export function AdditionalDetails({salaryView,location,lastDate}){
 
 
 export function DrawerDetails(props){
+  //console.log(props.information)
   return (
     <div className='p-4 md:p-10 m-4  border-2 rounded-lg '>
 <div className='flex justify-center font-bold text-xl md:text-4xl'>{props.company}</div>
@@ -73,7 +74,7 @@ export function DrawerDetails(props){
 {/* adding details for the skills here */}
 <div className=' md:m-4 md:p-6 md:border-2 md:rounded-lg'>
 
-{props.information.map((info,id)=>{
+{props.information && props.information.data?.map((info,id)=>{
 return (
   <div key={id} className='md:m-4 md:p-6 md:border-2 md:rounded-lg'>
   {/* <div className='w-full text-start text-xl font-medium '>{info.title}  </div>

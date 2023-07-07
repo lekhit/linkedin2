@@ -10,14 +10,13 @@ import Drawer from '@mui/material/Drawer';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ShareIcon from '@mui/icons-material/Share';
 import { useState } from 'react';
-import {MyTags,AdditionalDetails,DDetails,DrawerDetails} from './DrawerDetails2'
-
+import {MyTags,AdditionalDetails,DrawerDetails} from './DrawerDetails2'
 
 
 export default function Card(props){
   props.logoIMG='https://thumbsnap.com/i/3UFcD2ew.png';
   const [open,setOpen]=useState(false);
-
+props.information.data=props.information.data.filter((item)=>(item.type!=='mdx'))
 function MyDrawer(){
   return (
     <>
@@ -64,8 +63,6 @@ onKeyDown={()=>(setOpen(false))}
 
 <DrawerDetails {...props}/>
 
-
-
 </Box>
 </div>
     </Drawer>
@@ -86,7 +83,7 @@ onKeyDown={()=>(setOpen(false))}
     
 
   <div className="card-body">
-  <Link href={`/job/${props.id}`}>
+  <a target='_blank' href={`/job/${props.id}`}>
   <div className='w-3/4'>
    <h2 className="font-medium text-md md:text-2xl"><div className="align-baseline">{props.positionName}</div>
     </h2>
@@ -96,7 +93,7 @@ onKeyDown={()=>(setOpen(false))}
     
 <p className='line-clamp-2'>{props.description?.slice(0,200)}</p>
 <div className='line-clamp-2'><MyTags {...props}/></div>
-</Link>
+</a>
 
 
 
@@ -111,8 +108,10 @@ Apply Now
 <div className="flex-1"></div>
       <div className=' flex '>
     <button className="btn btn-primary h-2 btn-link  "><ShareIcon/> Share</button>
-      <button className="btn btn-primary h-2 btn-link" onClick={()=>(setOpen(true))}>{"Details"}  <ArrowForwardIcon/></button>
-    </div></div>
+     
+ <button className="btn btn-primary h-2 btn-link" onClick={()=>{setOpen(true)}} >{"Details"}  <ArrowForwardIcon/></button>
+
+     </div></div>
   </div>
 </div>
 </>

@@ -20,7 +20,6 @@ const new_user=await prisma.user.upsert({
   where:{email:user.email},
   update:{avatar:user.image,name:user.name},
   create:{name:user.name,email:user.email,avatar:user.image}
-
 })
 //console.log(new_user)
     }

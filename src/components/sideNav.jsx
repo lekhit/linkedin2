@@ -156,7 +156,7 @@ const Mobilenav=()=>{
   const [open,setOpen]=React.useState(true);
 
   const [selectedItem, setSelectedItem] = React.useState("Home"); 
-  const router=useRouter()
+
   const handleListItemClick = (url, itemText) => {
     setSelectedItem(itemText); 
     // navigate(url);
@@ -197,7 +197,7 @@ const Mobilenav=()=>{
 
 function Sidenav() {
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState("Home"); 
   const router=useRouter()
 
