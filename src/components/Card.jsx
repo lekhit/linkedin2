@@ -16,7 +16,7 @@ import {MyTags,AdditionalDetails,DrawerDetails} from './DrawerDetails2'
 export default function Card(props){
   props.logoIMG='https://thumbsnap.com/i/3UFcD2ew.png';
   const [open,setOpen]=useState(false);
-props.information.data=props.information.data.filter((item)=>(item.type!=='mdx'))
+props.information.data=props.information?.data?.filter((item)=>(item.type!=='mdx'))
 function MyDrawer(){
   return (
     <>

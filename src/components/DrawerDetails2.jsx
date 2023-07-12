@@ -74,7 +74,7 @@ export function DrawerDetails(props){
 {/* adding details for the skills here */}
 <div className=' md:m-4 md:p-6 md:border-2 md:rounded-lg'>
 
-{props.information && props.information.data?.map((info,id)=>{
+{props.information && props.information?.data?.map((info,id)=>{
 return (
   <div key={id} className='md:m-4 md:p-6 md:border-2 md:rounded-lg'>
   {/* <div className='w-full text-start text-xl font-medium '>{info.title}  </div>
